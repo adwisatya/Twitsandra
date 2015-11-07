@@ -15,25 +15,9 @@ import com.datastax.driver.core.Session;
  * @author adwisatya
  */
 public class Twitsandra {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
-        Cluster cluster;
-        Session session;
-        
-        cluster = Cluster.builder().addContactPoint("localhost").build();
-        session = cluster.connect("mykeyspace");
-        
-        // Taruh insert record di sini
-        session.execute("INSERT INTO users (username, password) VALUES ('aryya','pwdaryya')");
-        
-        ResultSet result = session.execute("SELECT * from users WHERE username='aryya'");
-        for(Row row : result){
-            System.out.println("Username: "+ row.getString("username") + " password: "+row.getString("password"));
-        }
-        cluster.close();
+        Twissandra_Engine twissandra_engine = new Twissandra_Engine("localhost", "mykeyspace");
+        twissandra_engine.show_user();
+        twissandra_engine.teminate_connection();
     }
 }
