@@ -24,7 +24,7 @@ public class Twitsandra {
         Cluster cluster;
         Session session;
         
-        cluster = Cluster.builder().addContactPoint("server1.bangsatya.com").build();
+        cluster = Cluster.builder().addContactPoint("localhost").build();
         session = cluster.connect("mykeyspace");
         
         // Taruh insert record di sini
@@ -32,7 +32,7 @@ public class Twitsandra {
         
         ResultSet result = session.execute("SELECT * from users WHERE username='aryya'");
         for(Row row : result){
-            System.out.println("Username: "+ row.getString("username" + " password: "+row.getString("password")));
+            System.out.println("Username: "+ row.getString("username") + " password: "+row.getString("password"));
         }
         cluster.close();
     }
