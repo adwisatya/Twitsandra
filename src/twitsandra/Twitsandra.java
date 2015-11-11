@@ -16,8 +16,11 @@ import com.datastax.driver.core.Session;
  */
 public class Twitsandra {
     public static void main(String[] args) {
-        Twissandra_Engine twissandra_engine = new Twissandra_Engine("localhost", "mykeyspace");
-        twissandra_engine.show_user();
+        Twissandra_Engine twissandra_engine = new Twissandra_Engine("server1.bangsatya.com", "mykeyspace");
+        twissandra_engine.show_user("aryya");
+        twissandra_engine.register_user("aryya2", "aryyaaa");
+        twissandra_engine.show_user("aryya2");
+        twissandra_engine.show_tweet("aryya2");
         twissandra_engine.teminate_connection();
     }
 }

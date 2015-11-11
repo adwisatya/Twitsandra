@@ -26,14 +26,19 @@ public class Twissandra_Engine {
         cluster = Cluster.builder().addContactPoint(hostname).build();
         session = cluster.connect(keyspace);
     }
-    public void show_user(){
-        ResultSet result = session.execute("SELECT * from users WHERE username='aryya'");
+    public void show_user(String username){
+        ResultSet result = session.execute("SELECT * from users WHERE username='"+username+"'");
         for(Row row : result){
             System.out.println("Username: "+ row.getString("username") + " password: "+row.getString("password"));
         }
     }
     public boolean register_user(String username, String password){
-        return true;
+        try{
+            ResultSet result = session.execute("INSERT INTO users (username,password) VALUES('"+username+"','"+password+"')");
+            return true;
+        }catch(Exception e){
+        }
+        return false;
     }
     public boolean follow(String target){
         
@@ -42,6 +47,20 @@ public class Twissandra_Engine {
     public boolean tweet(String tweet){
         
         return true;
+    }
+    public void show_tweet(String username){
+        try{
+            ResultSet result = session.execute("SELECT * from tweets WHERE username='"+username+"'");
+            if(result.getAvailableWithoutFetching()>0){
+                for(Row row : result){
+                    System.out.println("Username: "+ row.getString("username") + " tweet: "+row.getString("tweet"));
+                }
+            }else{
+                System.out.println("Tidak ada tweet dari "+username);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     public void teminate_connection(){
         cluster.close();
