@@ -124,7 +124,7 @@ public class Twissandra_Engine {
                 follower = row.getString("follower");
                 insert_to_timeline(tweet_id, follower, time_uuid);
             }
-            System.out.println("Tweeted!" + tweet_id + "," + time_uuid);
+            System.out.println("Tweeted!");
         } catch (Exception e) {
             e.printStackTrace();
         }
