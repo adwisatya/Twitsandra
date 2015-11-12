@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="cassandra-driver-dse-2.0.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/lib/cassandra-driver-dse-2.0.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

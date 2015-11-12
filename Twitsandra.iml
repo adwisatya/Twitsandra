@@ -7,5 +7,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="cassandra-driver-core-2.0.2" level="project" />
+    <orderEntry type="library" name="cassandra-driver-dse-2.0.2" level="project" />
+    <orderEntry type="library" name="guava-16.0.1" level="project" />
+    <orderEntry type="library" name="bsh-2.0b4" level="project" />
   </component>
 </module>
