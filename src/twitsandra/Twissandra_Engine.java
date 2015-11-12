@@ -9,6 +9,7 @@ import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
+import com.datastax.driver.core.utils.UUIDs;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
@@ -116,27 +117,32 @@ public class Twissandra_Engine {
     }
     public void tweet(String username, String tweet){
         try{
-            UUID tweet_id =  UUID.randomUUID();
+            UUID tweet_id =  UUIDs.random();
+            UUID time_uuid = UUIDs.timeBased();
             ResultSet result = session.execute("INSERT INTO tweets (tweet_id,username,body) VALUES("+tweet_id+",'"+username+"','"+tweet+"')");
-            System.out.println("Tweeted!");
+            System.out.println("Tweeted!"+tweet_id+","+time_uuid);
         }catch(Exception e){
             e.printStackTrace();
         }
         
     }
-    public void show_tweet(String username){
-        try{
-            ResultSet result = session.execute("SELECT * from tweets WHERE username='"+username+"'");
-            if(result.getAvailableWithoutFetching()>0){
-                System.out.println(username+" tweet's:");
-                for(Row row : result){
-                    System.out.println(row.getString("body"));
-                }
-            }else{
-                System.out.println("Tidak ada tweet dari "+username);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
+    public void show_userline(String username){
+        ResultSet result = session.execute("SELECT * from userline WHERE username='"+username+"'");
+        for(Row row : result){
+            show_tweet(row.getUUID("tweet_id"));
+        }
+    }
+    public void show_timeline(String username){
+        ResultSet result = session.execute("SELECT * from timeline WHERE username='"+username+"'");
+        for(Row row : result){
+            show_tweet(row.getUUID("tweet_id"));
+        }
+    }
+    
+    public void show_tweet(UUID tweet_id){
+        ResultSet result = session.execute("SELECT * from tweets WHERE tweet_id="+tweet_id+"");
+        for(Row row : result){
+            System.out.println(row.getString("body"));
         }
     }
     public void teminate_connection(){
