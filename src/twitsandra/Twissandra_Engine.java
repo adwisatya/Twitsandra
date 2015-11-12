@@ -107,8 +107,8 @@ public class Twissandra_Engine {
     }
     public void tweet(String username, String tweet){
         try{
-            UUID tweet_id =  new UUID(32, 12);
-            ResultSet result = session.execute("INSERT INTO tweets (tweet_id,username,body) VALUES('"+tweet_id+"','"+username+"','"+tweet+"')");
+            UUID tweet_id =  UUID.randomUUID();
+            ResultSet result = session.execute("INSERT INTO tweets (tweet_id,username,body) VALUES("+tweet_id+",'"+username+"','"+tweet+"')");
             System.out.println("Tweeted!");
         }catch(Exception e){
             e.printStackTrace();
@@ -119,8 +119,9 @@ public class Twissandra_Engine {
         try{
             ResultSet result = session.execute("SELECT * from tweets WHERE username='"+username+"'");
             if(result.getAvailableWithoutFetching()>0){
+                System.out.println(username+" tweet's:");
                 for(Row row : result){
-                    System.out.println("Username: "+ row.getString("username") + " tweet: "+row.getString("tweet"));
+                    System.out.println(row.getString("body"));
                 }
             }else{
                 System.out.println("Tidak ada tweet dari "+username);
