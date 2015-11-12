@@ -67,7 +67,7 @@ public class Twitsandra {
                     else
                         System.out.println("Anda Gagal Mengikuti "+query[0]);
                 }else if ((query = CommandRegexes.EXIT.match(inputs)) != null){
-                    System.out.print("Bye...... ");
+                    System.out.print("Bye....... ");
                     break;
                 }else if ((query = CommandRegexes.TIMELINE.match(inputs)) != null){
                     twissandra_engine.show_timeline(UserName);
