@@ -44,9 +44,14 @@ public class Twissandra_Engine {
         
         return true;
     }
-    public boolean tweet(String tweet){
+    public void tweet(String username, String tweet){
+        try{
+            ResultSet result = session.execute("INSERT INTO tweets (username,body) VALUES('"+username+"','"+tweet+"')");
+            System.out.println("Tweeted!");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         
-        return true;
     }
     public void show_tweet(String username){
         try{

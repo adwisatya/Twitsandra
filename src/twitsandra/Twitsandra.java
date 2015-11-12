@@ -21,6 +21,7 @@ public class Twitsandra {
         twissandra_engine.register_user("aryya2", "aryyaaa");
         twissandra_engine.show_user("aryya2");
         twissandra_engine.show_tweet("aryya2");
+        twissandra_engine.tweet("aryya2","aryya2 tweet");
         twissandra_engine.teminate_connection();
     }
 }
