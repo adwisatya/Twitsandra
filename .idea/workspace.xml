@@ -2,29 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5814039f-6a10-4803-8ed3-75ca2b40dfad" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Twitsandra/twitsandra/CommandRegexes.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Twitsandra/twitsandra/Twissandra_Engine.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/Twitsandra/twitsandra/Twitsandra.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/bsh-2.0b4.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/cassandra-driver-core-2.0.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/cassandra-driver-dse-2.0.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/guava-16.0.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/jcommander-1.27.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/log4j-1.2.17.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/lz4-1.2.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/metrics-core-3.0.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/netty-3.9.0.Final.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/CopyLibs/org-netbeans-modules-java-j2seproject-copylibstask.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/slf4j-api-1.7.5.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/slf4j-log4j12-1.7.6.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/snappy-java-1.0.5.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/twitsandra/CommandRegexes.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/twitsandra/Twissandra_Engine.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/twitsandra/Twitsandra.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/lib/nblibraries.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Twitsandra.iml" afterPath="$PROJECT_DIR$/Twitsandra.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/twitsandra/Twissandra_Engine.java" afterPath="$PROJECT_DIR$/src/twitsandra/Twissandra_Engine.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/twitsandra/Twitsandra.java" afterPath="$PROJECT_DIR$/src/twitsandra/Twitsandra.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Twitsandra.iws" />
@@ -51,8 +30,8 @@
       <file leaf-file-name="Twitsandra.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/twitsandra/Twitsandra.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.69343066">
-              <caret line="73" column="63" selection-start-line="73" selection-start-column="63" selection-end-line="73" selection-end-column="63" />
+            <state vertical-scroll-proportion="0.2875318">
+              <caret line="69" column="36" selection-start-line="69" selection-start-column="36" selection-end-line="69" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -64,7 +43,7 @@
         <entry file="file://$PROJECT_DIR$/src/twitsandra/CommandRegexes.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
               <folding>
                 <element signature="e#0#1252#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -76,9 +55,13 @@
       <file leaf-file-name="Twissandra_Engine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/twitsandra/Twissandra_Engine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="119" column="13" selection-start-line="119" selection-start-column="13" selection-end-line="119" selection-end-column="13" />
-              <folding />
+            <state vertical-scroll-proportion="18.0">
+              <caret line="136" column="151" selection-start-line="136" selection-start-column="151" selection-end-line="136" selection-end-column="151" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#7291#7292#0" expanded="true" />
+                <element signature="e#7322#7323#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,8 +88,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/twitsandra/RommandRegex.java" />
-        <option value="$PROJECT_DIR$/src/twitsandra/Twissandra_Engine.java" />
         <option value="$PROJECT_DIR$/src/twitsandra/CommandRegexes.java" />
+        <option value="$PROJECT_DIR$/src/twitsandra/Twissandra_Engine.java" />
         <option value="$PROJECT_DIR$/src/twitsandra/Twitsandra.java" />
       </list>
     </option>
@@ -532,12 +515,12 @@
       <option name="number" value="Default" />
       <updated>1447245359841</updated>
       <workItem from="1447245363409" duration="17939000" />
-      <workItem from="1447312899203" duration="3713000" />
+      <workItem from="1447312899203" duration="9677000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21652000" />
+    <option name="totallyTimeSpent" value="27616000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="30" width="1368" height="739" extended-state="7" />
@@ -551,10 +534,10 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32868218" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32093024" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3488372" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24963397" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -606,22 +589,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="91" column="9" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/twitsandra/Twissandra_Engine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="13" selection-start-line="119" selection-start-column="13" selection-end-line="119" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7291#7292#0" expanded="true" />
+            <element signature="e#7322#7323#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/twitsandra/CommandRegexes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
           <folding>
             <element signature="e#0#1252#0" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -629,10 +608,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/twitsandra/Twissandra_Engine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="18.0">
+          <caret line="136" column="151" selection-start-line="136" selection-start-column="151" selection-end-line="136" selection-end-column="151" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7291#7292#0" expanded="true" />
+            <element signature="e#7322#7323#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/twitsandra/Twitsandra.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.69343066">
-          <caret line="73" column="63" selection-start-line="73" selection-start-column="63" selection-end-line="73" selection-end-column="63" />
+        <state vertical-scroll-proportion="0.2875318">
+          <caret line="69" column="36" selection-start-line="69" selection-start-column="36" selection-end-line="69" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

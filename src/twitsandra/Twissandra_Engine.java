@@ -10,7 +10,6 @@ import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.core.utils.UUIDs;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
@@ -25,37 +24,40 @@ public class Twissandra_Engine {
     private String keyspace;
     private Cluster cluster;
     private Session session;
-    
+
     public Twissandra_Engine(String _hostname, String _keyspace) {
         hostname = _hostname;
         keyspace = _keyspace;
         cluster = Cluster.builder().addContactPoint(hostname).build();
         session = cluster.connect(keyspace);
     }
-    public boolean show_user(String username){
-        ResultSet result = session.execute("SELECT * from users WHERE username='"+username+"'");
-        if (result.getAvailableWithoutFetching()>0) {
+
+    public boolean show_user(String username) {
+        ResultSet result = session.execute("SELECT * from users WHERE username='" + username + "'");
+        if (result.getAvailableWithoutFetching() > 0) {
             for (Row row : result) {
-               // System.out.println("Username: " + row.getString("username") + " password: " + row.getString("password"));
+                // System.out.println("Username: " + row.getString("username") + " password: " + row.getString("password"));
             }
             return true;
-        }else{
+        } else {
             System.out.println("tidak ada");
             return false;
         }
     }
-    public boolean is_user_exist(String username){
-        ResultSet result = session.execute("SELECT * from users WHERE username='"+username+"'");
-        if (result.getAvailableWithoutFetching()>0) {
+
+    public boolean is_user_exist(String username) {
+        ResultSet result = session.execute("SELECT * from users WHERE username='" + username + "'");
+        if (result.getAvailableWithoutFetching() > 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    public int check_user(String username, String password){
-        ResultSet result = session.execute("SELECT * from users WHERE username='"+username+"'");
+
+    public int check_user(String username, String password) {
+        ResultSet result = session.execute("SELECT * from users WHERE username='" + username + "'");
         int bool = 2;
-        if (result.getAvailableWithoutFetching()>0) {
+        if (result.getAvailableWithoutFetching() > 0) {
             for (Row row : result) {
                 //System.out.println("Username: " + row.getString("username") + " password: " + row.getString("password"));
                 if (row.getString("password").equals(password)) {
@@ -64,28 +66,30 @@ public class Twissandra_Engine {
                     bool = 1;
                 }
             }
-        }else{
+        } else {
             System.out.println("tidak ada");
         }
         return bool;
     }
 
-    public boolean show_follower(String username, String target){
-        ResultSet result = session.execute("SELECT * from followers WHERE username='"+username+"' AND follower='"+target+"'");
-        if (result.getAvailableWithoutFetching()>0) {
+    public boolean show_follower(String username, String target) {
+        ResultSet result = session.execute("SELECT * from followers WHERE username='" + username + "' AND follower='" + target + "'");
+        if (result.getAvailableWithoutFetching() > 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    public boolean register_user(String username, String password){
-        try{
-            ResultSet result = session.execute("INSERT INTO users (username,password) VALUES('"+username+"','"+password+"')");
+
+    public boolean register_user(String username, String password) {
+        try {
+            ResultSet result = session.execute("INSERT INTO users (username,password) VALUES('" + username + "','" + password + "')");
             return true;
-        }catch(Exception e){
+        } catch (Exception e) {
         }
         return false;
     }
+
     public boolean follow(String target, String sumber) {
         try {
             Date sejak = new Date();
@@ -98,7 +102,7 @@ public class Twissandra_Engine {
                     System.out.println("Kamu udah follow dia");
                     return false;
                 }
-            }else{
+            } else {
                 System.out.println("Yang kamu mau follow gak ada");
                 return false;
             }
@@ -106,53 +110,79 @@ public class Twissandra_Engine {
             return false;
         }
     }
-    public void tweet(String username, String tweet){
-        try{
-            UUID tweet_id =  UUID.randomUUID();
+
+    public void tweet(String username, String tweet) {
+        try {
+            UUID tweet_id = UUIDs.random();
+            UUID time_uuid = UUIDs.timeBased();
             String follower;
-            ResultSet result = session.execute("INSERT INTO tweets (tweet_id,username,body) VALUES("+tweet_id+",'"+username+"','"+tweet+"')");
-            insert_to_userline(tweet_id, username);
-            insert_to_timeline(tweet_id,username);
-            ResultSet result2 = session.execute("SELECT * from followers WHERE username='"+username+"'");
+            ResultSet result = session.execute("INSERT INTO tweets (tweet_id,username,body) VALUES(" + tweet_id + ",'" + username + "','" + tweet + "')");
+            insert_to_userline(tweet_id, username, time_uuid);
+            insert_to_timeline(tweet_id, username, time_uuid);
+            ResultSet result2 = session.execute("SELECT * from followers WHERE username='" + username + "'");
             for (Row row : result2) {
                 follower = row.getString("follower");
-                insert_to_timeline(tweet_id,follower);
+                insert_to_timeline(tweet_id, follower, time_uuid);
             }
-            System.out.println("Tweeted!");
-        }catch(Exception e){
+            System.out.println("Tweeted!" + tweet_id + "," + time_uuid);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-    public void insert_to_userline(UUID tweet_id, String username){
-        try{
-            ResultSet result = session.execute("INSERT INTO userline (username,time,tweet_id) VALUES(" + username + ",'NOW()','" + tweet_id + "')");
-        }catch(Exception e){
+
+    public void insert_to_userline(UUID tweet_id, String username, UUID time_uuid) {
+        try {
+            //System.out.println("INSERT INTO userline (username,time,tweet_id) VALUES('" + username + "', "+time_uuid+", '" + tweet_id + "')");
+            ResultSet result = session.execute("INSERT INTO userline (username,time,tweet_id) VALUES('" + username + "', "+time_uuid+", " + tweet_id + ")");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void insert_to_timeline(UUID tweet_id, String username){
-        try{
-            ResultSet result = session.execute("INSERT INTO timeline (username,time,tweet_id) VALUES(" + username + ",'NOW()','" + tweet_id + "')");
-        }catch(Exception e){
+    public void insert_to_timeline(UUID tweet_id, String username, UUID  time_uuid) {
+        try {
+            //System.out.println("INSERT INTO timeline (username,time,tweet_id) VALUES('" + username + "', "+time_uuid+", '" + tweet_id + "')");
+            ResultSet result = session.execute("INSERT INTO timeline (username,time,tweet_id) VALUES('" + username + "', "+time_uuid+", " + tweet_id + ")");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void show_tweet(String username){
-        try{
-            ResultSet result = session.execute("SELECT * from tweets WHERE username='"+username+"'");
-            if(result.getAvailableWithoutFetching()>0){
-                System.out.println(username+" tweet's:");
-                for(Row row : result){
+    public void show_tweet(String username) {
+        try {
+            ResultSet result = session.execute("SELECT * from tweets WHERE username='" + username + "'");
+            if (result.getAvailableWithoutFetching() > 0) {
+                System.out.println(username + " tweet's:");
+                for (Row row : result) {
                     System.out.println(row.getString("body"));
                 }
-            }else{
-                System.out.println("Tidak ada tweet dari "+username);
+            } else {
+                System.out.println("Tidak ada tweet dari " + username);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void show_userline(String username){
+        ResultSet result = session.execute("SELECT * from userline WHERE username='"+username+"'");
+        for(Row row : result){
+            show_tweetid(row.getUUID("tweet_id"));
+        }
+    }
+    public void show_timeline(String username){
+        ResultSet result = session.execute("SELECT * from timeline WHERE username='"+username+"'");
+        for(Row row : result){
+            show_tweetid(row.getUUID("tweet_id"));
+        }
+    }
+    
+    public void show_tweetid(UUID tweet_id){
+        ResultSet result = session.execute("SELECT * from tweets WHERE tweet_id="+tweet_id+"");
+        for(Row row : result){
+            System.out.println(row.getString("body"));
+
         }
     }
     public void teminate_connection(){
@@ -162,9 +192,9 @@ public class Twissandra_Engine {
         /* taken from http://www.mkyong.com/java/java-md5-hashing-example/ */
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(input.getBytes());
- 
+
         byte byteData[] = md.digest();
- 
+
         //convert the byte to hex format method 1
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < byteData.length; i++) {

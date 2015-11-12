@@ -67,17 +67,20 @@ public class Twitsandra {
                     else
                         System.out.println("Anda Gagal Mengikuti "+query[0]);
                 }else if ((query = CommandRegexes.EXIT.match(inputs)) != null){
+                    System.out.print("Bye...... ");
                     break;
                 }else if ((query = CommandRegexes.TIMELINE.match(inputs)) != null){
-                    System.out.println("Timeline");
+                    twissandra_engine.show_timeline(UserName);
                 }else if ((query = CommandRegexes.TWEET.match(inputs)) != null){
                     twissandra_engine.tweet(UserName,query[0]);
                 }else if ((query = CommandRegexes.MYTWEET.match(inputs)) != null){
-                    twissandra_engine.show_tweet(UserName);
+                    twissandra_engine.show_userline(UserName);
                 }
+                System.out.print("Query: ");
                 inputs = input.nextLine();
             }
         }
+
 
         //twissandra_engine.show_all_user();
         //twissandra_engine.show_user("aryya");
@@ -85,6 +88,8 @@ public class Twitsandra {
         //twissandra_engine.show_user("aryya2");
 //        twissandra_engine.tweet("aryya", "testing tweet aryya 1");
 //        twissandra_engine.show_tweet("aryya");
+
+//        twissandra_engine.show_userline("aryya2");
         twissandra_engine.teminate_connection();
     }
 }
