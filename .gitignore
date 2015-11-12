@@ -3,3 +3,5 @@ manifest.mf
 nbproject/
 /dist/
 /build/
+.idea
+out
