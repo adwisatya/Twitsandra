@@ -3,5 +3,6 @@ manifest.mf
 nbproject/
 /dist/
 /build/
-.idea
-out
+.idea/
+.idea/workspace.xml
+out/
