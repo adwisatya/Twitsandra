@@ -9,9 +9,11 @@ import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
-
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
 import java.util.Date;
-
+import java.util.UUID;
 /**
  *
  * @author adwisatya
@@ -37,6 +39,14 @@ public class Twissandra_Engine {
             return true;
         }else{
             System.out.println("tidak ada");
+            return false;
+        }
+    }
+    public boolean is_user_exist(String username){
+        ResultSet result = session.execute("SELECT * from users WHERE username='"+username+"'");
+        if (result.getAvailableWithoutFetching()>0) {
+            return true;
+        }else{
             return false;
         }
     }
@@ -72,19 +82,33 @@ public class Twissandra_Engine {
         }
         return false;
     }
+    public boolean add_friend(String target, String sumber){
+        try{
+            Date sejak = new Date();
+            ResultSet result = session.execute("INSERT INTO friends (username,friend,since) VALUES('"+sumber+"','"+target+"', "+sejak+")");
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+        
+    }
     public boolean follow(String target, String sumber){
         try{
             Date sejak = new Date();
             ResultSet result = session.execute("INSERT INTO followers (username,follower,since) VALUES('"+target+"','"+sumber+"', "+sejak+")");
-            result = session.execute("INSERT INTO friends (username,friend,since) VALUES('"+sumber+"','"+target+"', "+sejak+")");
-            return true;
+            if(add_friend(target, sumber)){
+                return true;
+            }else{
+                return false;
+            }
         }catch (Exception e){
+            return false;
         }
-        return false;
     }
     public void tweet(String username, String tweet){
         try{
-            ResultSet result = session.execute("INSERT INTO tweets (username,body) VALUES('"+username+"','"+tweet+"')");
+            UUID tweet_id =  new UUID(32, 12);
+            ResultSet result = session.execute("INSERT INTO tweets (tweet_id,username,body) VALUES('"+tweet_id+"','"+username+"','"+tweet+"')");
             System.out.println("Tweeted!");
         }catch(Exception e){
             e.printStackTrace();
@@ -107,5 +131,19 @@ public class Twissandra_Engine {
     }
     public void teminate_connection(){
         cluster.close();
+    }
+    public String toMD5(String input) throws NoSuchAlgorithmException{
+        /* taken from http://www.mkyong.com/java/java-md5-hashing-example/ */
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(input.getBytes());
+ 
+        byte byteData[] = md.digest();
+ 
+        //convert the byte to hex format method 1
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < byteData.length; i++) {
+            sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        return sb.toString();
     }
 }
