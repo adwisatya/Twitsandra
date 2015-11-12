@@ -34,7 +34,7 @@ public class Twissandra_Engine {
         ResultSet result = session.execute("SELECT * from users WHERE username='"+username+"'");
         if (result.getAvailableWithoutFetching()>0) {
             for (Row row : result) {
-                System.out.println("Username: " + row.getString("username") + " password: " + row.getString("password"));
+               // System.out.println("Username: " + row.getString("username") + " password: " + row.getString("password"));
             }
             return true;
         }else{
@@ -68,10 +68,12 @@ public class Twissandra_Engine {
         return bool;
     }
 
-    public void show_all_user(){
-        ResultSet result = session.execute("SELECT * from users");
-        for(Row row : result){
-            System.out.println("Username: "+ row.getString("username") + " password: "+row.getString("password"));
+    public boolean show_follower(String username, String target){
+        ResultSet result = session.execute("SELECT * from followers WHERE username='"+username+"' AND follower='"+target+"'");
+        if (result.getAvailableWithoutFetching()>0) {
+            return true;
+        }else{
+            return false;
         }
     }
     public boolean register_user(String username, String password){
@@ -92,16 +94,23 @@ public class Twissandra_Engine {
         }
         
     }
-    public boolean follow(String target, String sumber){
-        try{
+    public boolean follow(String target, String sumber) {
+        try {
             Date sejak = new Date();
-            ResultSet result = session.execute("INSERT INTO followers (username,follower,since) VALUES('"+target+"','"+sumber+"', "+sejak+")");
-            if(add_friend(target, sumber)){
-                return true;
+            if (show_user(target)) {
+                if (!show_follower(target, sumber)) {
+                    ResultSet result = session.execute("INSERT INTO followers (username,follower,since) VALUES('" + target + "','" + sumber + "', 'NOW')");
+                    ResultSet result2 = session.execute("INSERT INTO friends (username,friend,since) VALUES('" + sumber + "','" + target + "', 'NOW')");
+                    return true;
+                } else {
+                    System.out.println("Kamu udah follow dia");
+                    return false;
+                }
             }else{
+                System.out.println("Yang kamu mau follow gak ada");
                 return false;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
